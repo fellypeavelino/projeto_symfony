@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+<ul>
+{% for error in errors %}
+    <li>{{ error.message }}</li>
+{% endfor %}
+</ul>
+<div class="col-md-5">
+    <div class="form-area"> 
+    {{ form_start(form, { 'attr': {'role':"form"} }) }}
+        {{ form_widget(form) }}
+        <br/>
+        <button type="submit" disabled=true id="submit" name="submit" class="btn btn-primary pull-right">
+            Submit Form
+        </button>
+    {{ form_end(form) }}
+    </div>
+</div>
+</div>
+    <!--<ul>
+        <li>
+            <a href="{{ path('cliente_index') }}">Back to the list</a>
+        </li>
+    </ul>-->
+{% endblock %}
+

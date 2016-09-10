@@ -1,0 +1,35 @@
+symfony_chamados:
+    resource: "@symfonyBundle/Controller/ChamadosController.php"
+    type:     annotation
+
+symfony_pedidos:
+    resource: "@symfonyBundle/Controller/PedidosController.php"
+    type:     annotation
+
+symfony_chamados:
+    resource: "@symfonyBundle/Controller/ChamadosController.php"
+    type:     annotation
+
+symfony_pedidos:
+    resource: "@symfonyBundle/Controller/PedidosController.php"
+    type:     annotation
+
+symfony_pedidos:
+    resource: "@symfonyBundle/Controller/PedidosController.php"
+    type:     annotation
+
+symfony_chamados:
+    resource: "@symfonyBundle/Controller/ChamadosController.php"
+    type:     annotation
+
+symfony_cliente:
+    resource: "@symfonyBundle/Controller/ClienteController.php"
+    type:     annotation
+
+symfony:
+    resource: "@symfonyBundle/Resources/config/routing.php"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

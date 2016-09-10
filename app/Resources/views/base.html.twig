@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+        <style type="text/css">
+        .red{
+            color:red;
+            }
+        .form-area
+        {
+            background-color: #FAFAFA;
+            padding: 10px 40px 60px;
+            margin: 10px 0px 60px;
+            border: 1px solid GREY;
+        }            
+        </style>
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){ 
+            $('#characterLeft').text('140 characters left');
+            $('#message').keydown(function () {
+                var max = 140;
+                var len = $(this).val().length;
+                if (len >= max) {
+                    $('#characterLeft').text('You have reached the limit');
+                    $('#characterLeft').addClass('red');
+                    $('#btnSubmit').addClass('disabled');            
+                } 
+                else {
+                    var ch = max - len;
+                    $('#characterLeft').text(ch + ' characters left');
+                    $('#btnSubmit').removeClass('disabled');
+                    $('#characterLeft').removeClass('red');            
+                }
+            }); 
+            $("#form_numero_pedido").keyup(function(){
+                $.ajax({
+                    url:"/pedidos/validAjax?id="+$("#form_numero_pedido").val(),
+                    type:"GET",
+                    dataType:"JSON",
+                    success:function(data){
+                        if(data.success){
+                            $(".error").remove();
+                            $("#submit").attr("disabled",false);
+                        }else{
+                            if($(".error").length == 0){
+                                var error = "<label class='error'>número do pedido não foi encontrado</label>";
+                                $("#form div").eq(3).append(error);
+                            }
+                        }
+                    }
+                });
+            });
+            $("#form_email").blur(function(){
+                $.ajax({
+                    url:"/cliente/validEmailAjax?email="+$("#form_email").val(),
+                    type:"GET",
+                    dataType:"JSON",
+                    success:function(data){
+                        if(!data.success){
+                            $(".error").remove();
+                            $("#submit").attr("disabled",false);
+                        }else{
+                            if($(".error").length == 0){
+                                var error = "<label class='error'>E-mail já foi cadastrado</label>";
+                                $("#form div").eq(1).append(error);
+                            }
+                        }
+                    }
+                })                
+            });   
+        });        
+    </script>
+</html>
