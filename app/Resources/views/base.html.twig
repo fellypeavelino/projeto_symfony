@@ -16,7 +16,18 @@
             padding: 10px 40px 60px;
             margin: 10px 0px 60px;
             border: 1px solid GREY;
-        }            
+        }  
+        .custab{
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5% 0;
+            box-shadow: 3px 3px 2px #ccc;
+            transition: 0.5s;
+        }
+        .custab:hover{
+            box-shadow: 3px 3px 0px transparent;
+            transition: 0.5s;
+        }          
         </style>
     </head>
     <body>
@@ -25,6 +36,7 @@
     </body>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/typeahead.bundle.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function(){ 
             $('#characterLeft').text('140 characters left');
@@ -56,6 +68,7 @@
                             if($(".error").length == 0){
                                 var error = "<label class='error'>número do pedido não foi encontrado</label>";
                                 $("#form div").eq(3).append(error);
+                                 $("#submit").attr("disabled",true);
                             }
                         }
                     }
@@ -74,11 +87,18 @@
                             if($(".error").length == 0){
                                 var error = "<label class='error'>E-mail já foi cadastrado</label>";
                                 $("#form div").eq(1).append(error);
+                                $("#submit").attr("disabled",true);
                             }
                         }
                     }
                 })                
-            });   
-        });        
+            });  
+            if (typeof array != "undefined") {
+                doTypeHeader(array);
+            } 
+        }); 
+        function doTypeHeader(array){
+            $('.typeahead').typeahead({ source:array })
+        }     
     </script>
 </html>

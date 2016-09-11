@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Acme\symfonyBundle\Entity\Chamados;
 use Acme\symfonyBundle\Form\ChamadosType;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * Chamados controller.
@@ -22,14 +23,30 @@ class ChamadosController extends Controller
      * @Route("/", name="chamados_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $indice = $request->query->get('page');
+        if($indice == ""){
+            $indice = 0;
+        }else{
+            $indice *= 5;
+        }
         $em = $this->getDoctrine()->getManager();
 
-        $chamados = $em->getRepository('symfonyBundle:Chamados')->findAll();
+        $listAllChamados = $em->getRepository('symfonyBundle:Chamados')->findAll();
 
+        $dql = "SELECT c FROM symfonyBundle:Chamados c";
+        $query = $em->createQuery($dql)
+                       ->setFirstResult($indice)
+                       ->setMaxResults(5)
+                       ;
+        //$paginator = new Paginator($query, $fetchJoinCollection = true);
+
+        $chamados = $query->getResult();
+        $pages = range(1,ceil(count($listAllChamados) / 5));
         return $this->render('chamados/index.html.twig', array(
             'chamados' => $chamados,
+            'pages' => $pages
         ));
     }
 
