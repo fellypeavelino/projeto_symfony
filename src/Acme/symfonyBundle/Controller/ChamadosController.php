@@ -8,7 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Acme\symfonyBundle\Entity\Chamados;
 use Acme\symfonyBundle\Form\ChamadosType;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * Chamados controller.
@@ -26,6 +25,7 @@ class ChamadosController extends Controller
     public function indexAction(Request $request)
     {
         $indice = $request->query->get('page');
+        $email = $request->query->get('email');
         if($indice == ""){
             $indice = 0;
         }else{
@@ -33,20 +33,43 @@ class ChamadosController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
 
-        $listAllChamados = $em->getRepository('symfonyBundle:Chamados')->findAll();
+        $repository = $em->getRepository('symfonyBundle:Chamados');
+        
 
-        $dql = "SELECT c FROM symfonyBundle:Chamados c";
+        /*$dql = "SELECT c FROM symfonyBundle:Chamados c";
         $query = $em->createQuery($dql)
                        ->setFirstResult($indice)
                        ->setMaxResults(5)
-                       ;
-        //$paginator = new Paginator($query, $fetchJoinCollection = true);
+                       ;*/
+        if($email == ""){
+            $query = $repository->createQueryBuilder('c')
+                ->innerJoin('c.cliente', 'cl')
+                ->setFirstResult($indice)
+                ->setMaxResults(5)
+                ->getQuery();    
+            $listAllChamados = $repository->findAll();        
+        }else{
+            $query = $repository->createQueryBuilder('c')
+                ->innerJoin('c.cliente', 'cl')
+                ->where('cl.email like :email')
+                ->setParameter('email', '%'.$email.'%')
+                ->setFirstResult($indice)
+                ->setMaxResults(5)
+                ->getQuery(); 
+            $listAllChamados = $repository->createQueryBuilder('c')
+                ->innerJoin('c.cliente', 'cl')
+                ->where('cl.email like :email')
+                ->setParameter('email', '%'.$email.'%')  
+                ->getQuery()
+                ->getResult();       
+        }
 
         $chamados = $query->getResult();
         $pages = range(1,ceil(count($listAllChamados) / 5));
         return $this->render('chamados/index.html.twig', array(
             'chamados' => $chamados,
-            'pages' => $pages
+            'pages' => $pages,
+            'email' => $email
         ));
     }
 

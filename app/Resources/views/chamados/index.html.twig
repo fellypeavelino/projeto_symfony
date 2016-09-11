@@ -16,8 +16,8 @@
                 <table class="table table-striped custab">
                 <thead>
                     <div class="input-group">
-                      <input type="text" class="form-control typeahead" placeholder="emails" aria-describedby="basic-addon2">
-                      <span class="input-group-addon" id="basic-addon2">
+                      <input type="text" class="form-control typeahead" placeholder="emails" value="{{ email }}" aria-describedby="basic-addon2">
+                      <span style="cursor:pointer;" class="input-group-addon" id="search">
                           <i class="glyphicon glyphicon-search"></i>
                       </span>
                     </div>
@@ -42,7 +42,7 @@
                 <ul class="pagination">
                 {% for keys,page in pages %}
                     <li>
-                        <a href="/chamados?page={{ keys }}">{{ page }}</a>
+                        <a href="/chamados?page={{ keys }}&email={{ email }}">{{ page }}</a>
                     </li>
                 {% endfor %}    
                 </ul>            

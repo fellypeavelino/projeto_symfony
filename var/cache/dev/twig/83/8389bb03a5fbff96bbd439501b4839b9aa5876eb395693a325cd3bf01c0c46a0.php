@@ -21,20 +21,20 @@ class __TwigTemplate_4d3618f9299ff692e556adcce6ca1f4c2bcd7c4279b91625cc0ca57fd33
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_bc1c201e38e8cf07dccffa1d8ecd3ba547cf3a969c1d1109d7f8f338e9ca0516 = $this->env->getExtension("native_profiler");
-        $__internal_bc1c201e38e8cf07dccffa1d8ecd3ba547cf3a969c1d1109d7f8f338e9ca0516->enter($__internal_bc1c201e38e8cf07dccffa1d8ecd3ba547cf3a969c1d1109d7f8f338e9ca0516_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "chamados/index.html.twig"));
+        $__internal_f70139cf06aae411a94b35fc9af78beb3d04210b82bf4fa28822218605dc017c = $this->env->getExtension("native_profiler");
+        $__internal_f70139cf06aae411a94b35fc9af78beb3d04210b82bf4fa28822218605dc017c->enter($__internal_f70139cf06aae411a94b35fc9af78beb3d04210b82bf4fa28822218605dc017c_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "chamados/index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_bc1c201e38e8cf07dccffa1d8ecd3ba547cf3a969c1d1109d7f8f338e9ca0516->leave($__internal_bc1c201e38e8cf07dccffa1d8ecd3ba547cf3a969c1d1109d7f8f338e9ca0516_prof);
+        $__internal_f70139cf06aae411a94b35fc9af78beb3d04210b82bf4fa28822218605dc017c->leave($__internal_f70139cf06aae411a94b35fc9af78beb3d04210b82bf4fa28822218605dc017c_prof);
 
     }
 
     // line 3
     public function block_body($context, array $blocks = array())
     {
-        $__internal_96240ea3b65581d815e32f517839cbb5bb48c89536c32d0e19f232300a3392b2 = $this->env->getExtension("native_profiler");
-        $__internal_96240ea3b65581d815e32f517839cbb5bb48c89536c32d0e19f232300a3392b2->enter($__internal_96240ea3b65581d815e32f517839cbb5bb48c89536c32d0e19f232300a3392b2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
+        $__internal_3d31a9bab74ac96de6882d47066699f420570599c678458f24d41b642fdd6ee6 = $this->env->getExtension("native_profiler");
+        $__internal_3d31a9bab74ac96de6882d47066699f420570599c678458f24d41b642fdd6ee6->enter($__internal_3d31a9bab74ac96de6882d47066699f420570599c678458f24d41b642fdd6ee6_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body"));
 
         // line 4
         echo "    <style type=\"text/css\">
@@ -52,8 +52,11 @@ class __TwigTemplate_4d3618f9299ff692e556adcce6ca1f4c2bcd7c4279b91625cc0ca57fd33
                 <table class=\"table table-striped custab\">
                 <thead>
                     <div class=\"input-group\">
-                      <input type=\"text\" class=\"form-control typeahead\" placeholder=\"emails\" aria-describedby=\"basic-addon2\">
-                      <span class=\"input-group-addon\" id=\"basic-addon2\">
+                      <input type=\"text\" class=\"form-control typeahead\" placeholder=\"emails\" value=\"";
+        // line 19
+        echo twig_escape_filter($this->env, (isset($context["email"]) ? $context["email"] : $this->getContext($context, "email")), "html", null, true);
+        echo "\" aria-describedby=\"basic-addon2\">
+                      <span style=\"cursor:pointer;\" class=\"input-group-addon\" id=\"search\">
                           <i class=\"glyphicon glyphicon-search\"></i>
                       </span>
                     </div>
@@ -108,6 +111,8 @@ class __TwigTemplate_4d3618f9299ff692e556adcce6ca1f4c2bcd7c4279b91625cc0ca57fd33
                         <a href=\"/chamados?page=";
             // line 45
             echo twig_escape_filter($this->env, $context["keys"], "html", null, true);
+            echo "&email=";
+            echo twig_escape_filter($this->env, (isset($context["email"]) ? $context["email"] : $this->getContext($context, "email")), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $context["page"], "html", null, true);
             echo "</a>
@@ -215,7 +220,7 @@ class __TwigTemplate_4d3618f9299ff692e556adcce6ca1f4c2bcd7c4279b91625cc0ca57fd33
     </ul>-->
 ";
         
-        $__internal_96240ea3b65581d815e32f517839cbb5bb48c89536c32d0e19f232300a3392b2->leave($__internal_96240ea3b65581d815e32f517839cbb5bb48c89536c32d0e19f232300a3392b2_prof);
+        $__internal_3d31a9bab74ac96de6882d47066699f420570599c678458f24d41b642fdd6ee6->leave($__internal_3d31a9bab74ac96de6882d47066699f420570599c678458f24d41b642fdd6ee6_prof);
 
     }
 
@@ -231,7 +236,7 @@ class __TwigTemplate_4d3618f9299ff692e556adcce6ca1f4c2bcd7c4279b91625cc0ca57fd33
 
     public function getDebugInfo()
     {
-        return array (  212 => 91,  205 => 86,  193 => 80,  187 => 77,  180 => 73,  176 => 72,  172 => 71,  168 => 70,  162 => 69,  159 => 68,  155 => 67,  129 => 53,  121 => 47,  110 => 45,  107 => 44,  103 => 43,  97 => 39,  88 => 36,  84 => 35,  80 => 34,  76 => 33,  73 => 32,  69 => 31,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  217 => 91,  210 => 86,  198 => 80,  192 => 77,  185 => 73,  181 => 72,  177 => 71,  173 => 70,  167 => 69,  164 => 68,  160 => 67,  134 => 53,  126 => 47,  113 => 45,  110 => 44,  106 => 43,  100 => 39,  91 => 36,  87 => 35,  83 => 34,  79 => 33,  76 => 32,  72 => 31,  57 => 19,  40 => 4,  34 => 3,  11 => 1,);
     }
 }
 /* {% extends 'base.html.twig' %}*/
@@ -252,8 +257,8 @@ class __TwigTemplate_4d3618f9299ff692e556adcce6ca1f4c2bcd7c4279b91625cc0ca57fd33
 /*                 <table class="table table-striped custab">*/
 /*                 <thead>*/
 /*                     <div class="input-group">*/
-/*                       <input type="text" class="form-control typeahead" placeholder="emails" aria-describedby="basic-addon2">*/
-/*                       <span class="input-group-addon" id="basic-addon2">*/
+/*                       <input type="text" class="form-control typeahead" placeholder="emails" value="{{ email }}" aria-describedby="basic-addon2">*/
+/*                       <span style="cursor:pointer;" class="input-group-addon" id="search">*/
 /*                           <i class="glyphicon glyphicon-search"></i>*/
 /*                       </span>*/
 /*                     </div>*/
@@ -278,7 +283,7 @@ class __TwigTemplate_4d3618f9299ff692e556adcce6ca1f4c2bcd7c4279b91625cc0ca57fd33
 /*                 <ul class="pagination">*/
 /*                 {% for keys,page in pages %}*/
 /*                     <li>*/
-/*                         <a href="/chamados?page={{ keys }}">{{ page }}</a>*/
+/*                         <a href="/chamados?page={{ keys }}&email={{ email }}">{{ page }}</a>*/
 /*                     </li>*/
 /*                 {% endfor %}    */
 /*                 </ul>            */

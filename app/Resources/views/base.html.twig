@@ -96,6 +96,15 @@
             if (typeof array != "undefined") {
                 doTypeHeader(array);
             } 
+            $("#search").click(function(){
+                var url = window.location.href;
+                if(url.indexOf("?") == -1){
+                    window.location.href = url+"?email="+$(".typeahead").val();
+                }else{
+                    url = url.split("&")[0];
+                    window.location.href = url+"&email="+$(".typeahead").val();
+                }
+            });
         }); 
         function doTypeHeader(array){
             $('.typeahead').typeahead({ source:array })
