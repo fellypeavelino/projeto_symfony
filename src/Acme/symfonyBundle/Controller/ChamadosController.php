@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Acme\symfonyBundle\Entity\Chamados;
 use Acme\symfonyBundle\Form\ChamadosType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Chamados controller.
@@ -24,6 +25,7 @@ class ChamadosController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $session = new Session();
         $indice = $request->query->get('page');
         $email = $request->query->get('email');
         if($indice == ""){
@@ -44,6 +46,7 @@ class ChamadosController extends Controller
         if($email == ""){
             $query = $repository->createQueryBuilder('c')
                 ->innerJoin('c.cliente', 'cl')
+                ->orderBy('c.id', 'DESC')
                 ->setFirstResult($indice)
                 ->setMaxResults(5)
                 ->getQuery();    
@@ -53,6 +56,7 @@ class ChamadosController extends Controller
                 ->innerJoin('c.cliente', 'cl')
                 ->where('cl.email like :email')
                 ->setParameter('email', '%'.$email.'%')
+                ->orderBy('c.id', 'DESC')
                 ->setFirstResult($indice)
                 ->setMaxResults(5)
                 ->getQuery(); 
@@ -63,7 +67,13 @@ class ChamadosController extends Controller
                 ->getQuery()
                 ->getResult();       
         }
-
+        foreach ($session->getFlashBag()->get('notice', array()) as $message) {
+            echo '
+            <div class="alert alert-success">
+              <strong>Aviso!</strong> '.$message.'.
+            </div>
+            ';
+        }
         $chamados = $query->getResult();
         $pages = range(1,ceil(count($listAllChamados) / 5));
         return $this->render('chamados/index.html.twig', array(

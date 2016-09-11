@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Cliente controller.
@@ -48,6 +49,7 @@ class ClienteController extends Controller
      */
     public function newAction(Request $request)
     {
+        $session = new Session();
         $cliente = new Cliente();
         $chamados = new Chamados();
         $pedidos = new Pedidos();
@@ -84,7 +86,8 @@ class ClienteController extends Controller
                 $em->persist($cliente);
                 $em->persist($chamados);
                 $em->flush();
-                echo $cliente->getId();
+                //echo $cliente->getId();
+                $session->getFlashBag()->add('notice', 'Cadastro realizado com sucesso');
                 return $this->redirectToRoute('chamados_index');
             }
             //return $this->redirectToRoute('cliente_show', array('id' => $cliente->getId()));
